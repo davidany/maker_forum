@@ -1,12 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.forum')
 
-@push('scripts')
-@endpush
-
-@section('content')
+@section('forum-content')
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="divide-y divide-gray-200">
             @forelse($threads as $thread)
+
                 <div class="p-4 hover:bg-gray-50">
                     <h2 class="text-xl font-semibold text-gray-800 mb-2">
                         <a href="{{ route('forum.threads.show', $thread->id) }}" class="hover:text-blue-600">
@@ -22,10 +20,10 @@
                             </a>
                         </div>
                         <span>
-                            {{ $thread->last_posted_at->diffForHumans() }} •
-                            {{ $thread->forum_posts_count }}
+                        {{ $thread->last_posted_at->diffForHumans() }} •
+                        {{ $thread->forum_posts_count }}
                             {{ Str::plural('reply', $thread->forum_posts_count) }}
-                        </span>
+                    </span>
                     </div>
                 </div>
             @empty
