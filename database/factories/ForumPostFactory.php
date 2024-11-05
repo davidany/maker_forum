@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ForumThread;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class ForumPostFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'content' => fake()->paragraphs(2, true),
+            'user_id' => User::factory(),
+            'thread_id' => ForumThread::factory(),
+            'is_best_answer' => false,
         ];
     }
 }

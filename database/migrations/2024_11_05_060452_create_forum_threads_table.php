@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('forum_threads', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('forum_categories')->onDelete('cascade');
+            $table->boolean('is_pinned')->default(false);
+            $table->boolean('is_locked')->default(false);
+            $table->timestamp('last_posted_at');
             $table->timestamps();
         });
     }

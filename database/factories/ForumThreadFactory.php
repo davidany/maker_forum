@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ForumCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,13 @@ class ForumThreadFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(),
+            'content' => fake()->paragraphs(3, true),
+            'user_id' => User::factory(),
+            'category_id' => ForumCategory::factory(),
+            'is_pinned' => false,
+            'is_locked' => false,
+            'last_posted_at' => now(),
         ];
     }
 }

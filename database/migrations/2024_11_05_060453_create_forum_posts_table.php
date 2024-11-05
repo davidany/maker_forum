@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('forum_posts', function (Blueprint $table) {
             $table->id();
+            $table->text('content');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('thread_id')->constrained('forum_threads')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('forum_posts')->onDelete('cascade'); // For nested replies
+            $table->boolean('is_best_answer')->default(false);
             $table->timestamps();
+            $table->softDeletes(); // Allows posts to be "deleted" but preserved in database
         });
     }
 
